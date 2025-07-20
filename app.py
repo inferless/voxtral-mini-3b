@@ -90,5 +90,3 @@ class InferlessPythonModel:
 
     def finalize(self):
         self.model = None
-        self.processor = None
-        torch.cuda.empty_cache()
