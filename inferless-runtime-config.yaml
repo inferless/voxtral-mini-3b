@@ -5,8 +5,9 @@ build:
     - mistral_common==1.8.1
     - accelerate==1.9.0
     - librosa==0.11.0
-    - "git+https://github.com/huggingface/transformers.git@34133d0a790787739bfc9a42603985de3728ede4#egg=transformers"
     - hf-transfer==0.1.9
     - huggingface-hub==0.33.1
     - pydantic==2.11.7
     - inferless==0.2.15
+  run:
+    - "pip install git+https://github.com/huggingface/transformers.git@34133d0a790787739bfc9a42603985de3728ede4#egg=transformers"
