@@ -60,11 +60,10 @@ class InferlessPythonModel:
         # Create conversation format
         conversation = self._create_conversation(inputs.audio_path, inputs.text_prompt)
         
-        print(f"Processing {len(inputs.audio_paths)} audio file(s)...")
         
         # Apply chat template
         model_inputs = self.processor.apply_chat_template(conversation)
-        model_inputs = model_inputs.to(self.device, dtype=torch.bfloat16)
+        model_inputs = model_inputs.to("cuda", dtype=torch.bfloat16)
         
         # Generate response
         generation_kwargs = {
@@ -74,8 +73,6 @@ class InferlessPythonModel:
             "top_p": inputs.top_p,
             "top_k": inputs.top_k,
         }
-        
-        print("Generating response...")
         with torch.no_grad():
             outputs = self.model.generate(**model_inputs, **generation_kwargs)
         
@@ -87,11 +84,11 @@ class InferlessPythonModel:
         
         generated_text = decoded_outputs[0].strip()
         
-        print("Response generated successfully!")
-        
         return ResponseObjects(
             generated_text=generated_text
         )
 
     def finalize(self):
         self.model = None
+        self.processor = None
+        torch.cuda.empty_cache()
