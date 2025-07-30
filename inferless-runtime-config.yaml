@@ -9,5 +9,4 @@ build:
     - huggingface-hub==0.33.1
     - pydantic==2.11.7
     - inferless==0.2.15
-  run:
-    - "pip install git+https://github.com/huggingface/transformers.git@34133d0a790787739bfc9a42603985de3728ede4#egg=transformers"
+    - transformers==4.54.1
